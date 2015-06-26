@@ -52,12 +52,19 @@ void sortData(strings* s){
 				small=j;
 		}
 		if(small!=i){
-			t=small->next;
-			small->next=i->next;
-			i->next=t;
-			t=small->prev;
-			small->prev=i->prev;
-			i->prev=t;
+			if(i->next!=small){
+				t=small->next;
+				small->next=i->next;
+				i->next=t;
+				t=small->prev;
+				small->prev=i->prev;
+				i->prev=t;
+			}else{
+				i->next=small->next;
+				small->next=i;
+				small->prev=i->prev;
+				i->prev=small;
+			}
 			small->prev->next=small;
 			i->prev->next=i;
 			if(small->next)
